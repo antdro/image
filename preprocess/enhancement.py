@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import cv2
 import numpy as np
 
@@ -83,4 +85,29 @@ class ImageEnhancement:
         """
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         image = cv2.equalizeHist(image)
+        return image
+
+    @staticmethod
+    def apply_clahe(image: np.ndarray, clip_limit: float, title_grid_size: Tuple[int, int]) -> np.ndarray:
+        """
+        Apply Contrast Limited Adaptive Histogram Equalization (CLAHE) to the input image.
+        Enhances the local contrast of an image.
+        
+        Args:
+            image (np.ndarray): Input image as a numpy array.
+            clip_limit (float): Threshold for contrast limiting.
+            tile_grid_size (Tuple[int, int]): Size of grid for histogram equalization.
+        
+        Returns:
+            np.ndarray: Image with CLAHE applied.
+
+        Note:
+            CLAHE is an adaptive version of histogram equalization.
+            It divides the image into small tiles and applies histogram equalization to each tile.
+            Contrast limiting is applied to avoid noise amplification.
+
+        """
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        clahe = cv2.createCLAHE(clipLimit=clip_limit, tileGridSize=title_grid_size)
+        image = clahe.apply(image)
         return image
