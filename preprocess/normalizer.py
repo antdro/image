@@ -15,6 +15,7 @@ class ImageNormalizer:
 
         Returns:
             np.ndarray: Normalized image.
+
         """
         return (image - np.mean(image)) / np.std(image)
 
@@ -31,5 +32,6 @@ class ImageNormalizer:
 
         Returns:
             np.ndarray: Normalized image.
+
         """
         return factor * (image / 255.0)

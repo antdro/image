@@ -4,6 +4,8 @@ import tensorflow as tf
 
 
 class ImageResizer:
+    """Resize the input image."""
+
     def __init__(self, library='tensorflow'):
         """
         Initialize the ImageResizer with the specified library.
@@ -28,6 +30,7 @@ class ImageResizer:
 
         Returns:
             np.ndarray: Resized image.
+
         """
         if self.library == 'opencv':
             return self._resize_with_opencv(path, width, height)
@@ -47,6 +50,7 @@ class ImageResizer:
 
         Returns:
             np.ndarray: Resized image.
+
         """
         image = cv2.imread(path)
         image = cv2.resize(image, (width, height))
@@ -64,7 +68,7 @@ class ImageResizer:
         
         Returns:
             np.ndarray: Resized image.
-        
+
         """
         image = tf.keras.preprocessing.image.load_img(path, target_size=(height, width))
         image = tf.keras.preprocessing.image.img_to_array(image, dtype=np.uint8)
